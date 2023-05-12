@@ -1,21 +1,21 @@
 import * as firebase from "../firebase.js"
 
-class View {
-    #parentContainer = document.body;
+export default class View {
+    parentContainer = document.body;
 
     renderMainView() {
-        const html = `<header>
+        const html = `<header id="header">
         <nav>
             <div class="logo">
                 <a href="#">Rent&Ride</a>
             </div>
             <div class="nav-links">
                 <ul>
-                    <li><a href="#">Wypożycz</a></li>
-                    <li><a href="#">Dlaczego my</a></li>
-                    <li><a href="#">Flota</a></li>
-                    <li><a href="#">Miasta</a></li>
-                    <li><a href="#" class="btn btn-primary">Załóż konto</a></li>
+                    <li><a href="#header">Wypożycz</a></li>
+                    <li><a href="#section-one">Dlaczego my</a></li>
+                    <li><a href="#section-two">Flota</a></li>
+                    <li><a href="#section-three">Miasta</a></li>
+                    <li><button href="#" class="btn btn-primary">Załóż konto</button></li>
                 </ul>
             </div>
         </nav>
@@ -131,8 +131,12 @@ class View {
         </div>
 
                     </footer>`;
+        this.clear();
+        this.parentContainer.insertAdjacentHTML("afterbegin", html);
+    }
 
-        this.#parentContainer.insertAdjacentHTML("afterbegin", html);
+    clear() {
+        this.parentContainer.innerHTML = ``;
     }
 
 
