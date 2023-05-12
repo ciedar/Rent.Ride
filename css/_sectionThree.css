@@ -1,0 +1,43 @@
+.figure-div {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.div-fig {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.div-fig img {
+    border-radius: 10px;
+}
+
+.div-info-one,
+.div-info-two,
+.div-info-three,
+.div-info-four {
+    height: 400px;
+    width: 20%;
+    background-position: center;
+    background-size: cover;
+}
+
+.div-info-one {
+    background-image: url(/images/cities/gdansk.jpg);
+}
+
+.div-info-two {
+    background-image: url(/images/cities/poznan.jpg);
+}
+
+.div-info-three {
+    background-image: url(/images/cities/warsaw.jpg);
+}
+
+.div-info-four {
+    background-image: url(/images/cities/krakow.jpg);
+}

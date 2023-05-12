@@ -1,5 +1,11 @@
 @import "_header.css";
+@import "_headerMedia.css";
 @import "_sectionOne.css";
+@import "_sectionOneMedia.css";
+@import "_sectionTwo.css";
+@import "_sectionTwoMedia.css";
+@import "_sectionThree.css";
+@import "_sectionThreeMedia.css";
 
 
 * {
@@ -13,127 +19,6 @@ body {
     background-color: #cbd5e1;
 }
 
-
-
-/* Media queries dla małych laptopów */
-@media screen and (max-width: 1199px) {
-
-    /* Zmiana szerokości elementów */
-    * {
-        width: 90%;
-    }
-
-    /* Zmiana marginesów dla elementów */
-    header {
-        padding: 10px;
-    }
-
-    nav {
-        padding: 10px;
-    }
-
-    .nav-links ul li {
-        margin-left: 10px;
-    }
-
-    .header-content h1 {
-        font-size: 40px;
-    }
-
-    .header-content p {
-        font-size: 16px;
-        margin-bottom: 30px;
-    }
-
-    .search-form {
-        width: 100%;
-    }
-}
-
-/* Media queries dla tabletów */
-@media screen and (max-width: 991px) {
-
-    /* Zmiana szerokości elementów */
-    * {
-        width: 100%;
-    }
-
-    /* Zmiana marginesów dla elementów */
-    header {
-        padding: 5px;
-    }
-
-    nav {
-        padding: 5px;
-    }
-
-    .nav-links ul li {
-        margin-left: 5px;
-    }
-
-    .header-content h1 {
-        font-size: 30px;
-    }
-
-    .header-content p {
-        font-size: 14px;
-        margin-bottom: 20px;
-    }
-
-    .search-form {
-        padding: 10px;
-    }
-}
-
-/* Media queries dla smartfonów */
-@media screen and (max-width: 767px) {
-
-    /* Zmiana szerokości elementów */
-    * {
-        width: 100%;
-    }
-
-    /* Zmiana marginesów dla elementów */
-    header {
-        padding: 5px;
-    }
-
-    nav {
-        padding: 5px;
-    }
-
-    .nav-links ul {
-        /* flex-direction: column; */
-        align-items: center;
-    }
-
-    .nav-links ul li {
-        margin: 10px 0;
-    }
-
-    .header-content h1 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .header-content p {
-        font-size: 12px;
-        margin-bottom: 10px;
-    }
-
-    .search-form {
-        padding: 10px;
-    }
-
-    .search-form label {
-        font-size: 12px;
-    }
-
-    .search-form input {
-        font-size: 14px;
-    }
-
-    .search-form button {
-        font-size: 14px;
-    }
+.section {
+    padding: 5em 2em 5em 2em;
 }

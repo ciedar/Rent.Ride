@@ -1,0 +1,41 @@
+@media screen and (max-width: 768px) {
+    .figure-div {
+        flex-wrap: wrap;
+    }
+
+    .div-fig {
+        margin-bottom: 2em;
+    }
+
+    .div-info-one,
+    .div-info-two,
+    .div-info-three,
+    .div-info-four {
+        width: 45%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .figure-div {
+        width: 80%;
+    }
+
+    .div-info-one,
+    .div-info-two,
+    .div-info-three,
+    .div-info-four {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1440px) {
+    .figure-div {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .figure-div {
+        width: 95%;
+    }
+}
