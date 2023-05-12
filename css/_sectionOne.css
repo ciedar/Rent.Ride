@@ -1,0 +1,45 @@
+.about-us {
+    margin-top: 5em;
+    padding: 2em;
+}
+
+.about-us-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 70%;
+    margin: auto;
+}
+
+.div-img {
+    align-items: center;
+    display: flex;
+    background-color: #FFF;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.div-img-text {
+    padding: 4em;
+}
+
+
+.div-img-text button {
+    background-color: #cbd5e1;
+    margin-top: 5em;
+    width: 40%;
+    height: 60px;
+}
+
+.figure-div {
+
+    margin-top: 5em;
+    display: flex;
+    gap: 5em;
+}
+
+.div-fig {
+    border-radius: 10px;
+    background-color: #FFF;
+    padding: 2em 5em;
+}

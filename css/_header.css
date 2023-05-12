@@ -1,0 +1,141 @@
+header {
+    background-color: #cbd5e1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+section {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    width: 95%;
+    margin: auto;
+}
+
+
+.logo {
+    width: 150px;
+    height: 50px;
+}
+
+
+.nav-links li {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li:last-child {
+    border-radius: 10px;
+    background-color: white;
+}
+
+.nav-links ul {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links ul li {
+    margin-left: 25px;
+    height: 3em;
+    align-self: center;
+}
+
+.nav-links ul li:hover {
+    border-radius: 10px;
+    background-color: white;
+
+}
+
+.nav-links ul li a {
+    color: #444;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-links ul li a:hover {
+    color: #00838F;
+}
+
+
+.header-content {
+    background-image: url("header-bg.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.header-content h1 {
+    font-size: 50px;
+    color: #FFF;
+    margin-bottom: 20px;
+}
+
+.header-content p {
+    font-size: 18px;
+    color: #FFF;
+    margin-bottom: 50px;
+}
+
+
+.search-form {
+    width: 600px;
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.search-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.form-group-dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row: 1fr 1fr;
+    column-gap: 1em;
+}
+
+.dateIn {
+    grid-row: 2/3;
+}
+
+.search-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    border: 1px solid #E0E0E0;
+    font-size: 16px;
+}
+
+.search-form button {
+    background-color: #00838F;
+    color: #FFF;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.search-form button[type="submit"]:hover {
+    background-color: #005F6B;
+}
