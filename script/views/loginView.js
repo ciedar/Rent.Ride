@@ -3,7 +3,7 @@ import * as firebase from "../firebase.js";
 
 
 class LoginView extends View {
-
+    #user;
     #headerHTML = `<header id="header">
     <nav>
         <div class="logo">
@@ -69,9 +69,10 @@ class LoginView extends View {
             if (!a.target.closest(".sign_in")) return;
             const email = document.querySelector(".email").value
             const password = document.querySelector(".password").value
-            firebase.loginAccount(email, password);
-            if (firebase.user != null) {
-                const html = `<header id="header">
+            firebase.loginAccount(email, password).then(() => {
+                this.#user = firebase.userId;
+                if (firebase.user != null) {
+                    const html = `<header id="header">
         <nav>
             <div class="logo">
                 <a href="#">Rent&Ride</a>
@@ -111,15 +112,21 @@ class LoginView extends View {
             </div>
         </div>
     </header>`
-                this.clear()
-                this.parentContainer.insertAdjacentHTML('afterbegin', html);
-            }
+                    this.clear()
+                    this.parentContainer.insertAdjacentHTML('afterbegin', html);
+                }
+            }).catch((error) => {
+                console.error(error);
+                this.clear();
+                this.createLoginView();
+            })
         })
+        this.renderNavElementSection();
     }
 
     renderNavElementSection() {
         this.parentContainer.addEventListener("click", (a) => {
-            console.log(a.target.href)
+            if (!a.target.getAttribute("href")) return;
             if (a.target.getAttribute("href") === "#section-one") {
                 const html = `${this.#headerHTML}
                             `
@@ -140,6 +147,14 @@ class LoginView extends View {
             }
             if (a.target.getAttribute("href") === "#section-four") {
                 const html = `${this.#headerHTML}
+                            <section class="profile-section section" id="section-four">
+                            <div class="profile-container">
+                            <aside class="aside-bar">
+                            <p>${this.#user}<p> 
+                            </aside>
+                            
+                            </div>
+                            </section>                       
                             `
                 this.clear()
                 this.parentContainer.insertAdjacentHTML("afterbegin", html)

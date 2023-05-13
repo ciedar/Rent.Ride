@@ -178,7 +178,17 @@ export default class View {
         this.parentContainer.innerHTML = ``;
     }
 
-
+    logOut() {
+        this.parentContainer.addEventListener("click", (a) => {
+            if (a.target.closest(".log-out-btn")) {
+                this.clear();
+                this.renderMainView();
+                firebase.logOut(firebase.auth).then(() => {
+                    alert(`Wylogowano pomyslnie`);
+                })
+            }
+        })
+    }
 }
 
 

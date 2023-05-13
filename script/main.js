@@ -12,6 +12,7 @@ import * as loginView from "./views/loginView.js";
 createView
 const mainViewControll = function () {
     mainView.app.renderMainView();
+    mainView.app.logOut();
 }
 
 const oneViewControll = function () {
@@ -31,7 +32,7 @@ const createControll = function () {
 const loginControll = function () {
     loginView.app.createLoginView()
     loginView.app.login()
-    loginView.app.renderNavElementSection();
+    // loginView.app.renderNavElementSection();
 
 }
 
@@ -41,6 +42,4 @@ twoViewControll();
 createControll();
 loginControll();
 
-console.log(firebase.user)
 
-if (firebase.user != null) console.log("zalogowano")

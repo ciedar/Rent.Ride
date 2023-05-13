@@ -4,6 +4,7 @@ import * as firebase from "../firebase.js";
 class CreateView extends View {
     #email;
     #password;
+    #username;
     createAccountView() {
         this.parentContainer.addEventListener("click", (a) => {
             if (!a.target.closest('.btn-primary')) return;
@@ -39,7 +40,8 @@ class CreateView extends View {
     async sign() {
         try {
             const result = await firebase.createAccount(firebase.auth, this.#email, this.#password);
-            return result;
+            const { user } = result;
+            firebase.createUserData(user, this.#username);
         } catch (error) {
             console.log(error)
         }
@@ -59,6 +61,7 @@ class CreateView extends View {
             if (!btn) return;
             this.#email = document.querySelector(".email").value;
             this.#password = document.querySelector(".password").value;
+            this.#username = document.querySelector(".username").value;
             this.sign();
             // userInfo.then((a) => { console.log(a?.user?.email) });
         })
