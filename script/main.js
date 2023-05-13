@@ -6,10 +6,10 @@ import * as firebase from "./firebase.js"
 import * as mainView from "./views/mainView.js";
 import * as oneView from "./views/sectionOneView.js"
 import * as twoView from "./views/sectionTwoView.js"
+import * as createView from "./views/createView.js";
 import * as loginView from "./views/loginView.js";
 
-
-
+createView
 const mainViewControll = function () {
     mainView.app.renderMainView();
 }
@@ -21,14 +21,26 @@ const twoViewControll = function () {
     twoView.app.showView();
 }
 
+const createControll = function () {
+    createView.app.createAccountView();
+    createView.app.normalEvent();
+    createView.app.googleEvent();
+
+}
+
 const loginControll = function () {
-    loginView.app.showView();
-    loginView.app.normalEvent();
-    loginView.app.googleEvent();
+    loginView.app.createLoginView()
+    loginView.app.login()
+    loginView.app.renderNavElementSection();
+
 }
 
 mainViewControll();
 oneViewControll();
 twoViewControll();
+createControll();
 loginControll();
 
+console.log(firebase.user)
+
+if (firebase.user != null) console.log("zalogowano")

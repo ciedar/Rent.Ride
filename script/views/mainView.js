@@ -2,6 +2,45 @@ import * as firebase from "../firebase.js"
 
 export default class View {
     parentContainer = document.body;
+    headerHTML = `<header id="header">
+    <nav>
+        <div class="logo">
+            <a href="#">Rent&Ride</a>
+        </div>
+        <div class="nav-links">
+            <ul>
+                <li><a href="#header">Wypożycz</a></li>
+                <li><a href="#section-one">Dlaczego my</a></li>
+                <li><a href="#section-two">Flota</a></li>
+                <li><a href="#section-three">Miasta</a></li>
+                <li><a href="#" class="btn btn-primary">Załóż konto</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="header-content">
+        <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <div class="search-form">
+            <form>
+                <div class="form-group">
+                    <label for="location">Skąd?</label>
+                    <input type="text" id="location" name="location" placeholder="Ville, aéroport, gare...">
+                </div>
+                <div class="form-group-dates">
+                    <label for="dates">Data odbioru</label>
+                    <input class="dateIn" type="date" id="dateIn" name="dates"
+                        placeholder="Date et heure de départ et de retour">
+                    <label for="passengers">Ilość pasażerów</label>
+                    <input class="dateOut" type="date" id="dateOut" name="passengers"
+                        placeholder="Nombre de passagers">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-secondary">Wyszukaj!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</header>`
 
     renderMainView() {
         const html = `<header id="header">
@@ -15,7 +54,7 @@ export default class View {
                     <li><a href="#section-one">Dlaczego my</a></li>
                     <li><a href="#section-two">Flota</a></li>
                     <li><a href="#section-three">Miasta</a></li>
-                    <li><button href="#" class="btn btn-primary">Załóż konto</button></li>
+                    <li><a href="#" class="btn btn-primary">Załóż konto</a></li>
                 </ul>
             </div>
         </nav>

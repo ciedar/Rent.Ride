@@ -1,5 +1,6 @@
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+import { onAuthStateChanged, getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 import { getFirestore, getDocs, collection } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
@@ -23,7 +24,17 @@ export const db = getFirestore(app);
 export const storage = getStorage(app);
 export const createAccount = createUserWithEmailAndPassword;
 export const loginAcc = signInWithEmailAndPassword;
+// export const logOut = singOut();
+// console.log(logOut)
 
+
+export const user = onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log(user, user.uid)
+    } else {
+        console.log("error")
+    };
+})
 
 export const loginAccount = async (email, password) => {
     try {

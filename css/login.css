@@ -1,0 +1,75 @@
+.login-div {
+    background-color: white;
+    padding: 2em;
+    width: 30%;
+    margin: 10em auto 10em auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    text-align: center;
+}
+
+
+.login-form-div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.email-div {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.register {
+    background-color: #00838F;
+    color: #FFF;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+
+.register_in_google {
+    background-color: #00838F;
+    color: #FFF;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+
+.user-div {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.sign_in {
+    background-color: #00838F;
+    color: #FFF;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.login-btn {
+    background-color: #00838F;
+    color: #FFF;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
