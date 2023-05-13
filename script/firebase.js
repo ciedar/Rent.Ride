@@ -1,7 +1,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import { signOut, onAuthStateChanged, getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-import { getFirestore, getDocs, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+import { getFirestore, getDocs, getDoc, collection, addDoc, doc, where, query } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
 
@@ -28,6 +28,7 @@ export const logOut = signOut;
 export let currentUser = null;
 export const user = onAuthStateChanged;
 export let userId;
+// console.log(doc(`msoNTvV67HSjjDPo0XpjKoVKpG02`))
 // export const user = onAuthStateChanged(auth, (user) => {
 //     if (user) {
 //         console.log(user, user.uid)
@@ -41,7 +42,22 @@ export let userId;
 //     currentUser = user;
 //     console.log(currentUser)
 // })
+// export const getCurrentUser = async (userId) => {
+//     const ref = db.collection("users").doc(userId);
+//     console.log(ref);
+//     ref.then((doc) => {
+//         if (doc.exsists) {
+//             console.log(doc.data())
+//         } else {
+//             console.log(`Nie ma`);
+//         }
+//     }).catch((error) => {
+//         console.error(error)
+//     })
+// }
 
+// const klak = await getCurrentUser(`msoNTvV67HSjjDPo0XpjKoVKpG02`);
+// console.log(klak)
 export const loginAccount = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -74,6 +90,7 @@ export const refURL = async (url) => {
 
 export const createUserData = async (data, info) => {
     const userData = collection(db, `users`);
+    console.log(userData);
     await addDoc(userData, {
         id: data.uid,
         email: data.email,
@@ -81,4 +98,22 @@ export const createUserData = async (data, info) => {
     })
 }
 
-// console.log(createUserData())
+
+// po id
+// const lolo = doc(db, "users", "msoNTvV67HSjjDPo0XpjKoVKpG02");
+
+// getDoc(lolo).then((info) => {
+//     if (info.exists()) {
+//         console.log(info.data())
+//     } else {
+//         console.log('nope');
+//     }
+// }).catch((error) => {
+//     console.log(error)
+// })
+const col = collection(db, "users");
+const q = query(col, where("id", "==", "msoNTvV67HSjjDPo0XpjKoVKpG02"));
+
+const result = await getDocs(q);
+
+result.forEach((a) => { console.log(a.data()) })

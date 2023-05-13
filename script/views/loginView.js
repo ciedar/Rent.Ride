@@ -4,6 +4,7 @@ import * as firebase from "../firebase.js";
 
 class LoginView extends View {
     #user;
+    #userData;
     #headerHTML = `<header id="header">
     <nav>
         <div class="logo">
@@ -72,6 +73,7 @@ class LoginView extends View {
             firebase.loginAccount(email, password).then(() => {
                 this.#user = firebase.userId;
                 if (firebase.user != null) {
+                    this.getCurrentUser(this.#user);
                     const html = `<header id="header">
         <nav>
             <div class="logo">
@@ -160,6 +162,11 @@ class LoginView extends View {
                 this.parentContainer.insertAdjacentHTML("afterbegin", html)
             }
         })
+    }
+    getCurrentUser(id) {
+        this.#userData = firebase.getCurrentUser(id);
+        // this.#userData.then((a) => { console.log(a) })
+        return this;
     }
 }
 
