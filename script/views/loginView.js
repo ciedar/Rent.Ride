@@ -5,6 +5,7 @@ import * as firebase from "../firebase.js";
 class LoginView extends View {
     #user;
     #userData;
+    #userId;
     #headerHTML = `<header id="header">
     <nav>
         <div class="logo">
@@ -73,8 +74,9 @@ class LoginView extends View {
                 await firebase.loginAccount(email, password);
                 this.#user = firebase.userId;
                 this.#userData = await firebase.getCurrentUserData("id", this.#user)
-
-                if (firebase.user != null) {
+                this.#userId = this.#userData[0].id
+                const user = await firebase.checkCurrentUser();
+                if (user) {
                     const html = `<header id="header">
                 <nav>
                   <div class="logo">
@@ -118,10 +120,15 @@ class LoginView extends View {
                     this.clear();
                     this.parentContainer.insertAdjacentHTML("afterbegin", html);
                 }
+                if (!firebase.loginAccount(email, password)) {
+                    this.clear();
+                    this.createLoginView();
+                }
             } catch (error) {
+                // this.#user = null;
                 console.error(error);
-                this.clear();
-                this.createLoginView();
+                // this.clear();
+                // this.createLoginView();
             }
         });
         this.renderNavElementSection();
@@ -178,7 +185,6 @@ class LoginView extends View {
                 if (!a.target.classList.contains("aside-a")) return;
                 if (a.target.textContent === "Profil") {
                     const data = this.#userData[0];
-                    console.log(data.username);
                     const html = `<div class="profile-container-div profile-div">
                     <div class="username-div profile-info-div">
                     <h2>Nazwa użytkownika: </h2>
@@ -212,9 +218,10 @@ class LoginView extends View {
             if (a.target.textContent === "Zmiana hasła") {
                 const html = `<div class="profile-container-div profile-div">
                 <div class="change-div profile-info-div">
-                <h2>Wprowadź aktualne hasło: <input class="delete-input" placeholder="password" type="password"></h2>
-                <h2>Wprowadź nowe hasło: <input class="delete-input" placeholder="password" type="password"></h2>
-                <h2>Potwierdź nowe hasło: <input class="delete-input" placeholder="password" type="password"></h2>
+                <h2>Wprowadź aktualne hasło: <input class="password-input" placeholder="password" type="password"></h2>
+                <h2>Wprowadź nowe hasło: <input class="new-password-input" placeholder="password" type="password"></h2>
+                <h2>Potwierdź nowe hasło: <input class="new-password-input-two" placeholder="password" type="password"></h2>
+                <button class="ok">Zatwierdź</button>
                 </div>`
                 document.querySelector(".profile-container-div").innerHTML = '';
                 document.querySelector(".profile-container-div").insertAdjacentHTML("afterbegin", html)
@@ -230,6 +237,66 @@ class LoginView extends View {
             }
         })
     }
+
+    // changePassword() {
+    //     document.body.addEventListener("click", (a) => {
+    //         if (!a.target.closest(".ok")) return;
+    //         const oldPassword = document.querySelector(".password-input").value;
+    //         const newPassword = document.querySelector(".new-password-input").value;
+    //         const repeatPassword = document.querySelector(".new-password-input-two").value;
+    //         // console.log(this.#userData[0]?.data?.passowrd)
+    //         console.log(this.#userData[0].data)
+    //         console.log(this.#userId);
+    //         if (this.#userData[0]?.data.password === oldPassword) {
+    //             console.log("here")
+    //             if (newPassword === repeatPassword) {
+    //                 console.log(this.#userData[0].data)
+    //                 const data = {
+    //                     password: newPassword
+    //                 }
+    //                 console.log(this.#userData[0].data)
+    //                 console.log(this.#userId);
+    //                 firebase.updateUserInfo(this.#userId, data);
+    //                 firebase.changePassword(newPassword)
+    //                 console.log(this.#userData[0].data)
+    //                 console.log(this.#userId);
+
+    //                 this.clear();
+    //                 this.renderMainView();
+    //                 firebase.logOut(firebase.auth).then(() => {
+    //                     alert(`Wylogowano pomyslnie`);
+    //                 })
+    //             }
+    //         }
+    //     })
+    // }
+    changePassword() {
+        document.body.addEventListener("click", async (a) => {
+            if (!a.target.closest(".ok")) return;
+            const oldPassword = document.querySelector(".password-input").value;
+            const newPassword = document.querySelector(".new-password-input").value;
+            const repeatPassword = document.querySelector(".new-password-input-two").value;
+
+            if (this.#userData[0]?.data.password === oldPassword) {
+                if (newPassword === repeatPassword) {
+                    const data = {
+                        password: newPassword
+                    };
+
+                    await firebase.updateUserInfo(this.#userId, data);
+                    await firebase.changePassword(newPassword);
+
+                    this.clear();
+                    this.renderMainView();
+                    firebase.logOut(firebase.auth).then(() => {
+                        alert("Wylogowano pomyślnie");
+                    });
+                }
+            }
+        });
+    }
+
+
 }
 
 export const app = new LoginView();

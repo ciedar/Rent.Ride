@@ -1,7 +1,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-import { signOut, onAuthStateChanged, getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-import { getFirestore, getDocs, getDoc, collection, addDoc, doc, where, query } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+import { signOut, onAuthStateChanged, getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, updatePassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+import { getFirestore, getDocs, getDoc, collection, addDoc, doc, where, query, updateDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
 
@@ -26,7 +26,7 @@ export const storage = getStorage(app);
 export const createAccount = createUserWithEmailAndPassword;
 export const loginAcc = signInWithEmailAndPassword;
 export const logOut = signOut;
-export let currentUser = null;
+export let currentUser = auth.currentUser;
 export const user = onAuthStateChanged;
 export let userId;
 export let currentUserData;
@@ -46,12 +46,20 @@ export const getCurrentUser = async (userId) => {
     }
 };
 
+export const checkCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            unsubscribe();
+            resolve(user);
+        }, reject);
+    });
+};
+
 export const loginAccount = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         userId = user.uid;
-        console.log(userId);
         console.log("Zalogowano jako:", user);
     } catch (error) {
         console.error("Błąd logowania:", error);
@@ -76,26 +84,73 @@ export const refURL = async (url) => {
     return getDownloadURL(link);
 };
 
-export const createUserData = async (data, info) => {
+export const createUserData = async (data, info, password) => {
     const userData = collection(db, "users");
     try {
         await addDoc(userData, {
             id: data.uid,
             email: data.email,
             username: info,
+            password: password
         });
     } catch (error) {
         console.error(error);
     }
 };
 
+// export const getCurrentUserData = async (type, userId) => {
+//     const col = collection(db, "users");
+//     const data = query(col, where(type, "==", userId));
+//     try {
+//         const result = await getDocs(data);
+//         return result.docs.map((a) => a.data());
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
 export const getCurrentUserData = async (type, userId) => {
     const col = collection(db, "users");
     const data = query(col, where(type, "==", userId));
     try {
         const result = await getDocs(data);
-        return result.docs.map((doc) => doc.data());
+        return result.docs.map((doc) => {
+            return {
+                id: doc.id,
+                data: doc.data()
+            };
+        });
     } catch (error) {
         console.error(error);
     }
 };
+
+
+
+export const changePassword = async (newPassword) => {
+    try {
+        const user = auth.currentUser;
+        await updatePassword(user, newPassword);
+        console.log('Hasło zostało pomyślnie zmienione.');
+    } catch (error) {
+        console.error('Wystąpił błąd podczas zmiany hasła:', error);
+    }
+};
+
+
+
+export const updateUserInfo = async (userId, userData) => {
+    try {
+        const userRef = doc(db, "users", userId)
+        await updateDoc(userRef, userData)
+        console.log("zaktualizowano");
+
+    } catch (error) {
+        console.log('cos poszło nie tak', error.message);
+    }
+}
+
+
+// const xd = await getCurrentUserData("id", "82gF3Fu1wIWux9MZ6719mgnCdHm2");
+// console.log(xd[0])
+// const id = xd[0].id;
+// console.log(id)

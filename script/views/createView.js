@@ -41,7 +41,8 @@ class CreateView extends View {
         try {
             const result = await firebase.createAccount(firebase.auth, this.#email, this.#password);
             const { user } = result;
-            firebase.createUserData(user, this.#username);
+            console.log(user)
+            firebase.createUserData(user, this.#username, this.#password);
         } catch (error) {
             console.log(error)
         }

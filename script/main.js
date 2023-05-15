@@ -34,6 +34,7 @@ const loginControll = function () {
     loginView.app.createLoginView()
     loginView.app.login()
     loginView.app.render();
+    loginView.app.changePassword();
 }
 
 
