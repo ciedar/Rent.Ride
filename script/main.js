@@ -9,6 +9,7 @@ import * as twoView from "./views/sectionTwoView.js"
 import * as createView from "./views/createView.js";
 import * as loginView from "./views/loginView.js";
 
+
 createView
 const mainViewControll = function () {
     mainView.app.renderMainView();
@@ -32,14 +33,13 @@ const createControll = function () {
 const loginControll = function () {
     loginView.app.createLoginView()
     loginView.app.login()
-    // loginView.app.renderNavElementSection();
-
+    loginView.app.render();
 }
+
 
 mainViewControll();
 oneViewControll();
 twoViewControll();
 createControll();
 loginControll();
-
 

@@ -19,6 +19,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
@@ -28,55 +29,42 @@ export const logOut = signOut;
 export let currentUser = null;
 export const user = onAuthStateChanged;
 export let userId;
-// console.log(doc(`msoNTvV67HSjjDPo0XpjKoVKpG02`))
-// export const user = onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//         console.log(user, user.uid)
-//         return user;
-//     } else {
-//         console.log("error")
-//     };
-// })
+export let currentUserData;
 
-// onAuthStateChanged(auth, (user) => {
-//     currentUser = user;
-//     console.log(currentUser)
-// })
-// export const getCurrentUser = async (userId) => {
-//     const ref = db.collection("users").doc(userId);
-//     console.log(ref);
-//     ref.then((doc) => {
-//         if (doc.exsists) {
-//             console.log(doc.data())
-//         } else {
-//             console.log(`Nie ma`);
-//         }
-//     }).catch((error) => {
-//         console.error(error)
-//     })
-// }
+export const getCurrentUser = async (userId) => {
+    const ref = doc(db, "users", userId);
+    console.log(ref);
+    try {
+        const docSnap = await getDoc(ref);
+        if (docSnap.exists()) {
+            console.log(docSnap.data());
+        } else {
+            console.log("Nie ma");
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
 
-// const klak = await getCurrentUser(`msoNTvV67HSjjDPo0XpjKoVKpG02`);
-// console.log(klak)
 export const loginAccount = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         userId = user.uid;
-        console.log(userId)
-        console.log(`Zalogowano jako:`, user)
+        console.log(userId);
+        console.log("Zalogowano jako:", user);
     } catch (error) {
-        console.error(`Błąd logowania:`, error)
+        console.error("Błąd logowania:", error);
     }
-}
+};
 
 export const googleAuth = new GoogleAuthProvider();
 export const signPop = () => signInWithPopup(auth, googleAuth);
 
 export const showData = async (type) => {
     try {
-        const data = await getDocs(collection(db, `${type}`));
-        console.log(data)
+        const data = await getDocs(collection(db, type));
+        console.log(data);
         return data;
     } catch (error) {
         console.error("Error:", error);
@@ -84,36 +72,30 @@ export const showData = async (type) => {
 };
 
 export const refURL = async (url) => {
-    const link = ref(storage, `${url}`);
+    const link = ref(storage, url);
     return getDownloadURL(link);
 };
 
 export const createUserData = async (data, info) => {
-    const userData = collection(db, `users`);
-    console.log(userData);
-    await addDoc(userData, {
-        id: data.uid,
-        email: data.email,
-        username: info
-    })
-}
+    const userData = collection(db, "users");
+    try {
+        await addDoc(userData, {
+            id: data.uid,
+            email: data.email,
+            username: info,
+        });
+    } catch (error) {
+        console.error(error);
+    }
+};
 
-
-// po id
-// const lolo = doc(db, "users", "msoNTvV67HSjjDPo0XpjKoVKpG02");
-
-// getDoc(lolo).then((info) => {
-//     if (info.exists()) {
-//         console.log(info.data())
-//     } else {
-//         console.log('nope');
-//     }
-// }).catch((error) => {
-//     console.log(error)
-// })
-const col = collection(db, "users");
-const q = query(col, where("id", "==", "msoNTvV67HSjjDPo0XpjKoVKpG02"));
-
-const result = await getDocs(q);
-
-result.forEach((a) => { console.log(a.data()) })
+export const getCurrentUserData = async (type, userId) => {
+    const col = collection(db, "users");
+    const data = query(col, where(type, "==", userId));
+    try {
+        const result = await getDocs(data);
+        return result.docs.map((doc) => doc.data());
+    } catch (error) {
+        console.error(error);
+    }
+};
