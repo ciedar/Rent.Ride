@@ -23,16 +23,20 @@ export default class View {
         <div class="search-form">
             <form>
                 <div class="form-group">
-                    <label for="location">Skąd?</label>
-                    <input type="text" id="location" name="location" placeholder="Ville, aéroport, gare...">
+                <label for="location">Skąd?</label>
+                <select id="location" name="location">
+                  <option value="">Wybierz miejsce</option>
+                  <option value="Poznań">Poznań</option>
+                  <option value="Gdańsk">Gdańsk</option>
+                  <option value="Warszawa">Warszawa</option>
+                  <option value="Kraków">Kraków</option>
+                </select>
                 </div>
                 <div class="form-group-dates">
                     <label for="dates">Data odbioru</label>
-                    <input class="dateIn" type="date" id="dateIn" name="dates"
-                        placeholder="Date et heure de départ et de retour">
-                    <label for="passengers">Ilość pasażerów</label>
-                    <input class="dateOut" type="date" id="dateOut" name="passengers"
-                        placeholder="Nombre de passagers">
+                    <input class="dateIn" type="date" id="dateIn" name="dateIn">
+                    <label for="passengers">Data zwrotu</label>
+                    <input class="dateOut" type="date" id="dateOut" name="dateOut">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-secondary">Wyszukaj!</button>

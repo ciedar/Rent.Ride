@@ -42,8 +42,8 @@ const loginControll = function () {
 
 
 const searchControll = function () {
-    searchView.app.renderSearchView();
-    // searchView.app.
+    // searchView.app.renderSearchView();
+    searchView.app.evnet()
 }
 
 mainViewControll();

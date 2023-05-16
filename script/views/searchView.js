@@ -2,29 +2,31 @@ import View from "./mainView.js";
 import * as firebase from "../firebase.js";
 
 class searchView extends View {
-    #container;
+  #container;
+  #fleet;
+  #elementContainer = document.body.closest("header");
 
-    renderSearchView() {
-        this.parentContainer.addEventListener("click", (a) => {
-            if (a.target.closest(".btn-secondary")) {
-                this.clear();
-                this.parentContainer.insertAdjacentHTML("afterbegin", this.headerHTML);
-                this.createContainer();
-                this.searchAsideBar();
-            }
-        })
-    }
-    createContainer() {
-        this.#container = document.createElement("section");
-        this.parentContainer.appendChild(this.#container);
-        this.#container.classList.add("section");
-        this.#container.classList.add("section-search");
-        this.#container.innerHTML = `<div class="side__bar"></div>
+  renderSearchView() {
+    this.parentContainer.addEventListener("click", (a) => {
+      if (a.target.closest(".btn-secondary")) {
+        this.clear();
+        this.parentContainer.insertAdjacentHTML("afterbegin", this.headerHTML);
+        this.createContainer();
+        this.searchAsideBar();
+      }
+    })
+  }
+  createContainer() {
+    this.#container = document.createElement("section");
+    this.parentContainer.appendChild(this.#container);
+    this.#container.classList.add("section");
+    this.#container.classList.add("section-search");
+    this.#container.innerHTML = `<div class="side__bar"></div>
                                     <div class="metin2"></div>`
 
-    }
-    searchAsideBar() {
-        const html = `<aside class="sidebar">
+  }
+  searchAsideBar() {
+    const html = `<aside class="sidebar">
         <div class="sidebar__section">
           <h2 class="sidebar__title">Filtruj wyniki</h2>
           <form class="sidebar__form">
@@ -54,9 +56,45 @@ class searchView extends View {
           </form>
         </div>
       </aside>`;
-        document.querySelector(".side__bar").insertAdjacentHTML("afterbegin", html);
-    }
+    document.querySelector(".side__bar").insertAdjacentHTML("afterbegin", html);
+  }
 
+  async loadCars(a) {
+    try {
+      this.#fleet = await firebase.showData(a);
+      if (!this.#fleet.ok) {
+        console.error(`tutaj error`)
+      }
+      this.createContainer();
+      this.searchAsideBar()
+      await Promise.all(this.#fleet.forEach(async (info) => {
+        const html = ` 
+              <div class="fire"> 
+              <img src="${await firebase.refURL(info.data()?.imgUrl)}" width="200px">
+              <div class="fire_fire">
+              <h2 class="name">${info.data()?.model}</h2>
+              <p>asdmaskd aksdjasik asdybasdjh jasnda</p>
+              <button>sprawdzam</button>
+              </div>
+              </div>`
+        document.querySelector(".metin2").insertAdjacentHTML("afterbegin", html);
+      }
+      ))
+
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+  evnet() {
+    this.parentContainer.addEventListener("click", (a) => {
+      if (!a.target.closest(".btn-secondary")) return;
+      this.clear();
+      this.parentContainer.insertAdjacentHTML("afterbegin", this.headerHTML);
+      // this.searchAsideBar();
+      this.loadCars("cars")
+
+    })
+  }
 }
 
 export const app = new searchView();

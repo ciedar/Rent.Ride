@@ -1,10 +1,10 @@
-/* .section-search {
+.section-search {
 
-    margin: 10em auto;
-    width: 65%;
+    /* margin: 10em auto; */
+    /* width: 65%; */
     display: flex;
     gap: 2em;
-} */
+}
 
 .side__bar {
     width: 20%;
@@ -149,4 +149,32 @@
 
 .slider__value--right {
     margin-left: auto;
+}
+
+
+
+
+
+/* ======================================= */
+
+.metin2 {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    /* justify-content: space-between; */
+    row-gap: 5em;
+}
+
+.fire {
+    border: 1px solid black;
+    border-radius: 10px;
+    /* width: calc(50% - 10px); */
+    display: flex;
+    gap: 1em;
+}
+
+.fire img {
+    border-radius: 10px;
 }
