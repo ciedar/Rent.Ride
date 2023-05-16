@@ -271,7 +271,11 @@ class LoginView extends View {
                 console.log(this.#userData[0].data)
                 const passwordInput = document.querySelector(".delete-input").value;
                 if (passwordInput === this.#userData[0].data.password) {
+                    console.log(this.#userId);
                     firebase.deleteAccount();
+                    firebase.deleteUserDataFromDataBase(this.#userId)
+                    this.clear();
+                    this.renderMainView();
                 }
             }
         })

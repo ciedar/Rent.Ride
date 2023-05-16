@@ -1,7 +1,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import { deleteUser, signOut, onAuthStateChanged, getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, updatePassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-import { getFirestore, getDocs, getDoc, collection, addDoc, doc, where, query, updateDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+import { deleteDoc, getFirestore, getDocs, getDoc, collection, addDoc, doc, where, query, updateDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
 
@@ -162,5 +162,12 @@ export const deleteAccount = () => {
         });
 }
 
-
-// deleteAccount()
+export const deleteUserDataFromDataBase = (userId) => {
+    // const userRef = doc(db, "users", userId);    
+    deleteDoc(doc(db, "users", userId))
+        .then(() => {
+            console.log(`Dane o użytkowniku nr ${userId} zostały pomyslnie usunięte`)
+        }).catch(() => {
+            console.log(`Cos poszlo nie tak`);
+        })
+}
