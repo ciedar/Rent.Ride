@@ -1,6 +1,6 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-import { signOut, onAuthStateChanged, getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, updatePassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+import { deleteUser, signOut, onAuthStateChanged, getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, updatePassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 import { getFirestore, getDocs, getDoc, collection, addDoc, doc, where, query, updateDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
@@ -150,7 +150,17 @@ export const updateUserInfo = async (userId, userData) => {
 }
 
 
-// const xd = await getCurrentUserData("id", "82gF3Fu1wIWux9MZ6719mgnCdHm2");
-// console.log(xd[0])
-// const id = xd[0].id;
-// console.log(id)
+export const deleteAccount = () => {
+    const user = auth.currentUser;
+    console.log(user);
+    deleteUser(user)
+        .then(() => {
+            console.log("Konto użytkownika zostało usunięte.");
+        })
+        .catch((error) => {
+            console.error("Błąd podczas usuwania konta użytkownika:", error);
+        });
+}
+
+
+// deleteAccount()

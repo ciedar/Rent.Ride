@@ -184,7 +184,8 @@ class LoginView extends View {
             try {
                 if (!a.target.classList.contains("aside-a")) return;
                 if (a.target.textContent === "Profil") {
-                    const data = this.#userData[0];
+                    const data = this.#userData[0].data;
+                    console.log(data);
                     const html = `<div class="profile-container-div profile-div">
                     <div class="username-div profile-info-div">
                     <h2>Nazwa użytkownika: </h2>
@@ -230,7 +231,7 @@ class LoginView extends View {
                 const html = `<div class="profile-container-div profile-div">
                 <div class="delete-div profile-info-div">
                 <h2>Wprowadź hasło: <input class="delete-input" placeholder="password" type="password"> </h2>
-                <button class="delete-ok-btn"></button> 
+                <button class="delete-ok-btn">Potwierdź</button> 
                 </div>`
                 document.querySelector(".profile-container-div").innerHTML = '';
                 document.querySelector(".profile-container-div").insertAdjacentHTML("afterbegin", html)
@@ -238,38 +239,6 @@ class LoginView extends View {
         })
     }
 
-    // changePassword() {
-    //     document.body.addEventListener("click", (a) => {
-    //         if (!a.target.closest(".ok")) return;
-    //         const oldPassword = document.querySelector(".password-input").value;
-    //         const newPassword = document.querySelector(".new-password-input").value;
-    //         const repeatPassword = document.querySelector(".new-password-input-two").value;
-    //         // console.log(this.#userData[0]?.data?.passowrd)
-    //         console.log(this.#userData[0].data)
-    //         console.log(this.#userId);
-    //         if (this.#userData[0]?.data.password === oldPassword) {
-    //             console.log("here")
-    //             if (newPassword === repeatPassword) {
-    //                 console.log(this.#userData[0].data)
-    //                 const data = {
-    //                     password: newPassword
-    //                 }
-    //                 console.log(this.#userData[0].data)
-    //                 console.log(this.#userId);
-    //                 firebase.updateUserInfo(this.#userId, data);
-    //                 firebase.changePassword(newPassword)
-    //                 console.log(this.#userData[0].data)
-    //                 console.log(this.#userId);
-
-    //                 this.clear();
-    //                 this.renderMainView();
-    //                 firebase.logOut(firebase.auth).then(() => {
-    //                     alert(`Wylogowano pomyslnie`);
-    //                 })
-    //             }
-    //         }
-    //     })
-    // }
     changePassword() {
         document.body.addEventListener("click", async (a) => {
             if (!a.target.closest(".ok")) return;
@@ -296,75 +265,21 @@ class LoginView extends View {
         });
     }
 
+    deleteAccount() {
+        document.body.addEventListener("click", (a) => {
+            if (a.target.closest(".delete-ok-btn")) {
+                console.log(this.#userData[0].data)
+                const passwordInput = document.querySelector(".delete-input").value;
+                if (passwordInput === this.#userData[0].data.password) {
+                    firebase.deleteAccount();
+                }
+            }
+        })
+    }
+
 
 }
 
 export const app = new LoginView();
 
 
-
-
-    // async login() {
-    //     this.parentContainer.addEventListener("click", (a) => {
-    //         if (!a.target.closest(".sign_in")) return;
-    //         const email = document.querySelector(".email").value
-    //         const password = document.querySelector(".password").value
-    //         try {
-
-    //         }
-    //         await firebase.loginAccount(email, password).then(() => {
-    //             this.#user = firebase.userId;
-    //             this.#userData = firebase.getCurrentUserData("id", this.#user)
-    //             console.log(this.#userData);
-    //             if (firebase.user != null) {
-    //                 const html = `<header id="header">
-    //     <nav>
-    //         <div class="logo">
-    //             <a href="#">Rent&Ride</a>
-    //         </div>
-    //         <div class="nav-links">
-    //             <ul>
-    //                 <li><a href="#header">Wypożycz</a></li>
-    //                 <li><a href="#section-one">Dlaczego my</a></li>
-    //                 <li><a href="#section-two">Flota</a></li>
-    //                 <li><a href="#section-three">Miasta</a></li>
-    //                 <li><a href="#section-four">Profil</a></li>
-    //                 <li><a href="#" class="btn log-out-btn">Wyloguj</a></li>
-    //             </ul>
-    //         </div>
-    //     </nav>
-    //     <div class="header-content">
-    //         <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-    //         <p>Lorem ipsum dolor sit amet.</p>
-    //         <div class="search-form">
-    //             <form>
-    //                 <div class="form-group">
-    //                     <label for="location">Skąd?</label>
-    //                     <input type="text" id="location" name="location" placeholder="Ville, aéroport, gare...">
-    //                 </div>
-    //                 <div class="form-group-dates">
-    //                     <label for="dates">Data odbioru</label>
-    //                     <input class="dateIn" type="date" id="dateIn" name="dates"
-    //                         placeholder="Date et heure de départ et de retour">
-    //                     <label for="passengers">Ilość pasażerów</label>
-    //                     <input class="dateOut" type="date" id="dateOut" name="passengers"
-    //                         placeholder="Nombre de passagers">
-    //                 </div>
-    //                 <div class="form-group">
-    //                     <button type="submit" class="btn btn-secondary">Wyszukaj!</button>
-    //                 </div>
-    //             </form>
-    //         </div>
-    //     </div>
-    // </header>`
-    //                 this.clear()
-    //                 this.parentContainer.insertAdjacentHTML('afterbegin', html);
-    //             }
-    //         }).catch((error) => {
-    //             console.error(error);
-    //             this.clear();
-    //             this.createLoginView();
-    //         })
-    //     })
-    //     this.renderNavElementSection();
-    // }

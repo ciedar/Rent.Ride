@@ -35,6 +35,7 @@ const loginControll = function () {
     loginView.app.login()
     loginView.app.render();
     loginView.app.changePassword();
+    loginView.app.deleteAccount();
 }
 
 
