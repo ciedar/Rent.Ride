@@ -6,8 +6,9 @@
 @import "_sectionTwoMedia.css";
 @import "_sectionThree.css";
 @import "_sectionThreeMedia.css";
-@import "login.css";
+@import "_login.css";
 @import "_asideBar.css";
+@import "_searchSection.css";
 
 
 * {

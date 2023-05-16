@@ -1,0 +1,152 @@
+/* .section-search {
+
+    margin: 10em auto;
+    width: 65%;
+    display: flex;
+    gap: 2em;
+} */
+
+.side__bar {
+    width: 20%;
+}
+
+.sidebar {
+    background-color: #F9FAFB;
+    border: 1px solid #E2E8F0;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+}
+
+.sidebar__section+.sidebar__section {
+    margin-top: 2rem;
+}
+
+.sidebar__title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.sidebar__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar__label {
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar__select,
+.sidebar__input {
+    border: 1px solid #CBD5E0;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.sidebar__button {
+    background-color: #1A202C;
+    border: none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.75rem;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar__button:hover {
+    background-color: #2D3748;
+}
+
+.sidebar__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar__item+.sidebar__item {
+    margin-top: 1rem;
+}
+
+.sidebar__image {
+    border-radius: 4px;
+    max-width: 100%;
+}
+
+.sidebar__item-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.sidebar__item-description {
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.slider {
+    width: 100%;
+    height: 2rem;
+    position: relative;
+    margin: 2rem 0;
+}
+
+.slider__range {
+    /* -webkit-appearance: none; */
+    width: 100%;
+    height: 0.5rem;
+    background-color: #ddd;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.slider__range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background-color: #000;
+    cursor: pointer;
+}
+
+.slider__range::-moz-range-thumb {
+    width: 1rem;
+    height: 1rem;
+    background-color: #000;
+    cursor: pointer;
+}
+
+.slider__values {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.slider__value {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.slider__value--left {
+    margin-right: auto;
+}
+
+.slider__value--right {
+    margin-left: auto;
+}
