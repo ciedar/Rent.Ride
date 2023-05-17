@@ -65,6 +65,7 @@ class LoginView extends View {
             this.parentContainer.insertAdjacentHTML("afterbegin", html);
         })
     }
+
     async login() {
         this.parentContainer.addEventListener("click", async (event) => {
             if (!event.target.closest(".sign_in")) return;
@@ -78,61 +79,60 @@ class LoginView extends View {
                 const user = await firebase.checkCurrentUser();
                 if (user) {
                     const html = `<header id="header">
-                <nav>
-                  <div class="logo">
-                    <a href="#">Rent&Ride</a>
-                  </div>
-                  <div class="nav-links">
-                    <ul>
-                      <li><a href="#header">Wypożycz</a></li>
-                      <li><a href="#section-one">Dlaczego my</a></li>
-                      <li><a href="#section-two">Flota</a></li>
-                      <li><a href="#section-three">Miasta</a></li>
-                      <li><a href="#section-four">Profil</a></li>
-                      <li><a href="#" class="btn log-out-btn">Wyloguj</a></li>
-                    </ul>
-                  </div>
-                </nav>
-                <div class="header-content">
-                  <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-                  <p>Lorem ipsum dolor sit amet.</p>
-                  <div class="search-form">
-                    <form>
-                      <div class="form-group">
-                        <label for="location">Skąd?</label>
-                        <input type="text" id="location" name="location" placeholder="Ville, aéroport, gare...">
+                    <nav>
+                      <div class="logo">
+                        <a href="#">Rent&Ride</a>
                       </div>
-                      <div class="form-group-dates">
-                        <label for="dates">Data odbioru</label>
-                        <input class="dateIn" type="date" id="dateIn" name="dates"
-                          placeholder="Date et heure de départ et de retour">
-                        <label for="passengers">Ilość pasażerów</label>
-                        <input class="dateOut" type="date" id="dateOut" name="passengers"
-                          placeholder="Nombre de passagers">
+                      <div class="nav-links">
+                        <ul>
+                          <li><a href="#header">Wypożycz</a></li>
+                          <li><a href="#section-one">Dlaczego my</a></li>
+                          <li><a href="#section-two">Flota</a></li>
+                          <li><a href="#section-three">Miasta</a></li>
+                          <li><a href="#section-four">Profil</a></li>
+                          <li><a href="#" class="btn log-out-btn">Wyloguj</a></li>
+                        </ul>
                       </div>
-                      <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Wyszukaj!</button>
+                    </nav>
+                    <div class="header-content">
+                      <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+                      <p>Lorem ipsum dolor sit amet.</p>
+                      <div class="search-form">
+                        <form>
+                          <div class="form-group">
+                            <label for="location">Skąd?</label>
+                            <input type="text" id="location" name="location" placeholder="Ville, aéroport, gare...">
+                          </div>
+                          <div class="form-group-dates">
+                            <label for="dates">Data odbioru</label>
+                            <input class="dateIn" type="date" id="dateIn" name="dates"
+                              placeholder="Date et heure de départ et de retour">
+                            <label for="passengers">Ilość pasażerów</label>
+                            <input class="dateOut" type="date" id="dateOut" name="passengers"
+                              placeholder="Nombre de passagers">
+                          </div>
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-secondary">Wyszukaj!</button>
+                          </div>
+                        </form>
                       </div>
-                    </form>
-                  </div>
-                </div>
-              </header>`;
+                    </div>
+                  </header>`;
                     this.clear();
                     this.parentContainer.insertAdjacentHTML("afterbegin", html);
                 }
-                if (!firebase.loginAccount(email, password)) {
+                if (!user) {
                     this.clear();
                     this.createLoginView();
                 }
             } catch (error) {
-                // this.#user = null;
                 console.error(error);
-                // this.clear();
-                // this.createLoginView();
+
             }
         });
         this.renderNavElementSection();
     }
+
 
     renderNavElementSection() {
         this.parentContainer.addEventListener("click", (a) => {
