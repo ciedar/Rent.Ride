@@ -2,7 +2,8 @@ import View from "./mainView.js";
 import * as firebase from "../firebase.js";
 
 class searchView extends View {
-  #container;
+  #value;
+  #container
   #fleet;
   #elementContainer = document.body.closest("header");
 
@@ -62,32 +63,36 @@ class searchView extends View {
   async loadCars(a) {
     try {
       this.#fleet = await firebase.showData(a);
-      if (!this.#fleet.ok) {
-        console.error(`tutaj error`)
-      }
       this.createContainer();
       this.searchAsideBar()
-      await Promise.all(this.#fleet.forEach(async (info) => {
+      const data = this.#fleet.docs.map(a => { return a.data() });
+      const filter = data.filter((a) => {
+        if (a.location === `${this.#value.value.toLowerCase()}`) {
+          return a;
+        }
+      })
+      filter.forEach(async (a) => {
         const html = ` 
-              <div class="fire"> 
-              <img src="${await firebase.refURL(info.data()?.imgUrl)}" width="200px">
-              <div class="fire_fire">
-              <h2 class="name">${info.data()?.model}</h2>
-              <p>asdmaskd aksdjasik asdybasdjh jasnda</p>
-              <button>sprawdzam</button>
-              </div>
-              </div>`
+                 <div class="fire"> 
+                 <img src="${await firebase.refURL(a.imgUrl)}" width="200px">
+                 <div class="fire_fire">
+                 <h2 class="name">${a.model}</h2>
+                 <p>asdmaskd aksdjasik asdybasdjh jasnda</p>
+                 <button>sprawdzam</button>
+                 </div>
+                 </div>`
         document.querySelector(".metin2").insertAdjacentHTML("afterbegin", html);
-      }
-      ))
-
+      });
     } catch (error) {
       console.error(error.message);
     }
   }
   evnet() {
     this.parentContainer.addEventListener("click", (a) => {
+      // a.preventDefault()
       if (!a.target.closest(".btn-secondary")) return;
+      this.#value = document.querySelector("#location");
+      // console.log(this.#value);
       this.clear();
       this.parentContainer.insertAdjacentHTML("afterbegin", this.headerHTML);
       this.loadCars("cars")

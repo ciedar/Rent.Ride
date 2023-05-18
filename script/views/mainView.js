@@ -62,7 +62,7 @@ export default class View {
                     <button class="btn operations__tab operations__tab--2" data-tab="2">
                         Van
                     </button>
-                </div>\
+                </div>
                 <div class="div-talento-img">
                 </div>
             </div>
@@ -202,8 +202,8 @@ export default class View {
             <form>
                 <div class="form-group">
                 <label for="location">Skąd?</label>
-                <select id="location" name="location">
-                  <option value="">Wybierz miejsce</option>
+                <select class="location" id="location" name="location">
+                  <option value="Wszystkie">Wybierz miejsce</option>
                   <option value="Poznań">Poznań</option>
                   <option value="Gdańsk">Gdańsk</option>
                   <option value="Warszawa">Warszawa</option>

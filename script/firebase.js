@@ -84,7 +84,7 @@ export const signPop = () => signInWithPopup(auth, googleAuth);
 export const showData = async (type) => {
     try {
         const data = await getDocs(collection(db, type));
-        console.log(data);
+        // console.log(data);
         return data;
     } catch (error) {
         console.error("Error:", error);
@@ -183,3 +183,19 @@ export const deleteUserDataFromDataBase = (userId) => {
             console.log(`Cos poszlo nie tak`);
         })
 }
+
+
+
+
+
+const colRef = collection(db, "cars");
+const okok = await getDocs(colRef);
+const map = okok.docs.map(a => { return a.data() });
+console.log(map)
+const fil = map.filter((a) => {
+    if (a.location === "gdańsk") {
+        return a;
+    }
+})
+console.log(fil)
+
