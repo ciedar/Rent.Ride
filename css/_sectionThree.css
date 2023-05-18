@@ -1,43 +1,61 @@
-.figure-div {
+.our-location {
+    height: 400px;
     width: 70%;
     margin: auto;
     display: flex;
-    justify-content: space-between;
+    gap: 2em;
+    box-shadow: none;
 }
 
-.div-fig {
+.card {
+    width: 100%;
+    perspective: 800px;
+    max-width: 450px;
+    /* height: auto; */
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.card-inner {
+    display: flex;
+    position: relative;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(-180deg);
+}
+
+.card-image img {
+    width: 100%;
     border-radius: 10px;
 }
 
-.div-fig img {
-    border-radius: 10px;
+.card-side {
+    text-align: center;
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
 }
 
-.div-info-one,
-.div-info-two,
-.div-info-three,
-.div-info-four {
-    height: 400px;
-    width: 20%;
-    background-position: center;
-    background-size: cover;
+.card-side-back {
+    transform: rotateY(180deg);
 }
 
-.div-info-one {
-    background-image: url(/images/cities/gdansk.jpg);
+.card-gda {
+    justify-self: start;
 }
 
-.div-info-two {
-    background-image: url(/images/cities/poznan.jpg);
+.card-poz {
+    justify-self: center;
 }
 
-.div-info-three {
-    background-image: url(/images/cities/warsaw.jpg);
+.card-war {
+    justify-self: start;
 }
 
-.div-info-four {
-    background-image: url(/images/cities/krakow.jpg);
+.card-kra {
+    justify-self: center;
 }

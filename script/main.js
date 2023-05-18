@@ -13,7 +13,7 @@ import * as searchView from "./views/searchView.js";
 
 createView
 const mainViewControll = function () {
-    mainView.app.renderMainView();
+    // mainView.app.renderMainView();
     mainView.app.logOut();
     mainView.app.homePage();
 }

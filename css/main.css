@@ -25,3 +25,15 @@ body {
 .section {
     padding: 5em 2em 5em 2em;
 }
+
+a {
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+}
+
+input {
+    cursor: pointer;
+}
