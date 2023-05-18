@@ -203,7 +203,7 @@ export default class View {
                 <div class="form-group">
                 <label for="location">Skąd?</label>
                 <select class="location" id="location" name="location">
-                  <option value="Wszystkie">Wybierz miejsce</option>
+                  <option value="Wszystkie">Wszystkie lokalizacje</option>
                   <option value="Poznań">Poznań</option>
                   <option value="Gdańsk">Gdańsk</option>
                   <option value="Warszawa">Warszawa</option>
@@ -258,7 +258,7 @@ export default class View {
                     <div class="form-group">
                     <label for="location">Skąd?</label>
                     <select id="location" name="location">
-                      <option value="">Wybierz miejsce</option>
+                      <option value="Wszystkie">Wszystkie lokalizacje</option>
                       <option value="Poznań">Poznań</option>
                       <option value="Gdańsk">Gdańsk</option>
                       <option value="Warszawa">Warszawa</option>

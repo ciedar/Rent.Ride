@@ -71,18 +71,33 @@ class searchView extends View {
           return a;
         }
       })
-      filter.forEach(async (a) => {
-        const html = ` 
-                 <div class="fire"> 
-                 <img src="${await firebase.refURL(a.imgUrl)}" width="200px">
-                 <div class="fire_fire">
-                 <h2 class="name">${a.model}</h2>
-                 <p>asdmaskd aksdjasik asdybasdjh jasnda</p>
-                 <button>sprawdzam</button>
-                 </div>
-                 </div>`
-        document.querySelector(".metin2").insertAdjacentHTML("afterbegin", html);
-      });
+      if (this.#value.value.toLowerCase() != "wszystkie") {
+        filter.forEach(async (a) => {
+          const html = ` 
+                   <div class="fire"> 
+                   <img src="${await firebase.refURL(a.imgUrl)}" width="200px">
+                   <div class="fire_fire">
+                   <h2 class="name">${a.model}</h2>
+                   <p>asdmaskd aksdjasik asdybasdjh jasnda</p>
+                   <button>sprawdzam</button>
+                   </div>
+                   </div>`
+          document.querySelector(".metin2").insertAdjacentHTML("afterbegin", html);
+        });
+      } else {
+        data.forEach(async (a) => {
+          const html = ` 
+          <div class="fire"> 
+          <img src="${await firebase.refURL(a.imgUrl)}" width="200px">
+          <div class="fire_fire">
+          <h2 class="name">${a.model}</h2>
+          <p>asdmaskd aksdjasik asdybasdjh jasnda</p>
+          <button>sprawdzam</button>
+          </div>
+          </div>`
+          document.querySelector(".metin2").insertAdjacentHTML("afterbegin", html);
+        })
+      }
     } catch (error) {
       console.error(error.message);
     }
