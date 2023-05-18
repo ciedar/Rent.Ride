@@ -27,21 +27,21 @@ export const createAccount = createUserWithEmailAndPassword;
 export const loginAcc = signInWithEmailAndPassword;
 export const logOut = signOut;
 export let currentUser = auth.currentUser;
-// export const user = onAuthStateChanged;
+export const user = onAuthStateChanged;
 export let userId;
 export let currentUserData;
 
 
-export const logged = () => {
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            console.log("zalogowany")
-        } else {
-            console.log("nie")
-        }
-    })
-}
-logged()
+// export const logged = () => {
+//     onAuthStateChanged(auth, (user) => {
+//         if (user) {
+//             console.log("zalogowany")
+//         } else {
+//             console.log("nie")
+//         }
+//     })
+// }
+// logged()
 
 export const getCurrentUser = async (userId) => {
     const ref = doc(db, "users", userId);

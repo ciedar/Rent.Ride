@@ -11,7 +11,7 @@ import * as loginView from "./views/loginView.js";
 import * as searchView from "./views/searchView.js";
 
 
-createView
+
 const mainViewControll = function () {
     mainView.app.renderMainView();
     mainView.app.logOut();
@@ -42,7 +42,6 @@ const loginControll = function () {
 
 
 const searchControll = function () {
-    // searchView.app.renderSearchView();
     searchView.app.evnet()
 }
 

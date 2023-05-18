@@ -9,7 +9,7 @@ class LoginView extends View {
     #headerHTML = `<header id="header">
     <nav>
         <div class="logo">
-            <a href="#">Rent&Ride</a>
+            <a href="#home">Rent&Ride</a>
         </div>
         <div class="nav-links">
             <ul>
@@ -46,6 +46,7 @@ class LoginView extends View {
         </div>
     </div>
 </header>`
+    #bodyHTML = ``
     createLoginView() {
         this.parentContainer.addEventListener("click", (a) => {
             if (!a.target.closest(".login-btn")) return;
@@ -76,93 +77,99 @@ class LoginView extends View {
                 this.#user = firebase.userId;
                 this.#userData = await firebase.getCurrentUserData("id", this.#user)
                 this.#userId = this.#userData[0].id
-                const user = await firebase.checkCurrentUser();
-                if (user) {
-                    const html = `<header id="header">
-                    <nav>
-                      <div class="logo">
-                        <a href="#">Rent&Ride</a>
-                      </div>
-                      <div class="nav-links">
-                        <ul>
-                          <li><a href="#header">Wypożycz</a></li>
-                          <li><a href="#section-one">Dlaczego my</a></li>
-                          <li><a href="#section-two">Flota</a></li>
-                          <li><a href="#section-three">Miasta</a></li>
-                          <li><a href="#section-four">Profil</a></li>
-                          <li><a href="#" class="btn log-out-btn">Wyloguj</a></li>
-                        </ul>
-                      </div>
-                    </nav>
-                    <div class="header-content">
-                    <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <div class="search-form">
-                        <form>
-                            <div class="form-group">
-                            <label for="location">Skąd?</label>
-                            <select id="location" name="location">
-                              <option value="">Wybierz miejsce</option>
-                              <option value="Poznań">Poznań</option>
-                              <option value="Gdańsk">Gdańsk</option>
-                              <option value="Warszawa">Warszawa</option>
-                              <option value="Kraków">Kraków</option>
-                            </select>
-                            </div>
-                            <div class="form-group-dates">
-                                <label for="dates">Data odbioru</label>
-                                <input class="dateIn" type="date" id="dateIn" name="dateIn">
-                                <label for="passengers">Data zwrotu</label>
-                                <input class="dateOut" type="date" id="dateOut" name="dateOut">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-secondary">Wyszukaj!</button>
-                            </div>
-                        </form>
+                // const user = await firebase.checkCurrentUser();
+                firebase.user(firebase.auth, (user) => {
+                    if (user) {
+                        const html = `<header id="header">
+                        <nav>
+                          <div class="logo">
+                            <a href="#">Rent&Ride</a>
+                          </div>
+                          <div class="nav-links">
+                            <ul>
+                              <li><a href="#header">Wypożycz</a></li>
+                              <li><a href="#section-one">Dlaczego my</a></li>
+                              <li><a href="#section-two">Flota</a></li>
+                              <li><a href="#section-three">Miasta</a></li>
+                              <li><a href="#section-four">Profil</a></li>
+                              <li><a href="#" class="btn log-out-btn">Wyloguj</a></li>
+                            </ul>
+                          </div>
+                        </nav>
+                        <div class="header-content">
+                        <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <div class="search-form">
+                            <form>
+                                <div class="form-group">
+                                <label for="location">Skąd?</label>
+                                <select id="location" name="location">
+                                  <option value="">Wybierz miejsce</option>
+                                  <option value="Poznań">Poznań</option>
+                                  <option value="Gdańsk">Gdańsk</option>
+                                  <option value="Warszawa">Warszawa</option>
+                                  <option value="Kraków">Kraków</option>
+                                </select>
+                                </div>
+                                <div class="form-group-dates">
+                                    <label for="dates">Data odbioru</label>
+                                    <input class="dateIn" type="date" id="dateIn" name="dateIn">
+                                    <label for="passengers">Data zwrotu</label>
+                                    <input class="dateOut" type="date" id="dateOut" name="dateOut">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-secondary">Wyszukaj!</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                  </header>`;
-                    this.clear();
-                    this.parentContainer.insertAdjacentHTML("afterbegin", html);
-                }
-                if (!user) {
-                    this.clear();
-                    this.createLoginView();
-                }
+                      </header>`;
+                        this.clear();
+                        this.parentContainer.insertAdjacentHTML("afterbegin", html);
+                        this.renderNavElementSection();
+                    } else {
+                        this.clear();
+                        this.createLoginView();
+                    }
+                })
             } catch (error) {
                 console.error(error);
 
             }
-        });
-        this.renderNavElementSection();
+        })
     }
 
 
     renderNavElementSection() {
         this.parentContainer.addEventListener("click", (a) => {
-            // const data = this.getUserData();
-            // data.forEach((a) => { console.log(a) });
+
             if (!a.target.getAttribute("href")) return;
+            if (a.target.getAttribute("href") === "#home") {
+                const html = `${this.#headerHTML}${this.bodyHTML}`
+                console.log(html)
+                this.clear()
+                this.parentContainer.insertAdjacentHTML("afterbegin", html)
+            }
             if (a.target.getAttribute("href") === "#section-one") {
-                const html = `${this.headerHTML}
+                const html = `${this.#headerHTML}
                             `
                 this.clear()
                 this.parentContainer.insertAdjacentHTML("afterbegin", html)
             }
             if (a.target.getAttribute("href") === "#section-two") {
-                const html = `${this.headerHTML}
+                const html = `${this.#headerHTML}
                             `
                 this.clear()
                 this.parentContainer.insertAdjacentHTML("afterbegin", html)
             }
             if (a.target.getAttribute("href") === "#section-three") {
-                const html = `${this.headerHTML}
+                const html = `${this.#headerHTML}
                             `
                 this.clear()
                 this.parentContainer.insertAdjacentHTML("afterbegin", html)
             }
             if (a.target.getAttribute("href") === "#section-four") {
-                const html = `${this.headerHTML}
+                const html = `${this.#headerHTML}
                             <section class="profile-section section" id="section-four">
                             <div class="profile-container">
                             <aside class="aside-bar">
@@ -188,7 +195,7 @@ class LoginView extends View {
             try {
                 if (!a.target.classList.contains("aside-a")) return;
                 if (a.target.textContent === "Profil") {
-                    const data = this.#userData[0].data;
+                    const data = this.#userData.data;
                     console.log(data);
                     const html = `<div class="profile-container-div profile-div">
                     <div class="username-div profile-info-div">

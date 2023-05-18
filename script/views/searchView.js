@@ -6,16 +6,16 @@ class searchView extends View {
   #fleet;
   #elementContainer = document.body.closest("header");
 
-  renderSearchView() {
-    this.parentContainer.addEventListener("click", (a) => {
-      if (a.target.closest(".btn-secondary")) {
-        this.clear();
-        this.parentContainer.insertAdjacentHTML("afterbegin", this.headerHTML);
-        this.createContainer();
-        this.searchAsideBar();
-      }
-    })
-  }
+  // renderSearchView() {
+  //   this.parentContainer.addEventListener("click", (a) => {
+  //     if (a.target.closest(".btn-secondary")) {
+  //       this.clear();
+  //       this.parentContainer.insertAdjacentHTML("afterbegin", this.headerHTML);
+  //       this.createContainer();
+  //       this.searchAsideBar();
+  //     }
+  //   })
+  // }
   createContainer() {
     this.#container = document.createElement("section");
     this.parentContainer.appendChild(this.#container);
