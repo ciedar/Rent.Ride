@@ -90,7 +90,6 @@ class searchView extends View {
       if (!a.target.closest(".btn-secondary")) return;
       this.clear();
       this.parentContainer.insertAdjacentHTML("afterbegin", this.headerHTML);
-      // this.searchAsideBar();
       this.loadCars("cars")
 
     })

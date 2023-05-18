@@ -64,7 +64,6 @@ class CreateView extends View {
             this.#password = document.querySelector(".password").value;
             this.#username = document.querySelector(".username").value;
             this.sign();
-            // userInfo.then((a) => { console.log(a?.user?.email) });
         })
     }
 

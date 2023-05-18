@@ -95,28 +95,32 @@ class LoginView extends View {
                       </div>
                     </nav>
                     <div class="header-content">
-                      <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-                      <p>Lorem ipsum dolor sit amet.</p>
-                      <div class="search-form">
+                    <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+                    <p>Lorem ipsum dolor sit amet.</p>
+                    <div class="search-form">
                         <form>
-                          <div class="form-group">
+                            <div class="form-group">
                             <label for="location">Skąd?</label>
-                            <input type="text" id="location" name="location" placeholder="Ville, aéroport, gare...">
-                          </div>
-                          <div class="form-group-dates">
-                            <label for="dates">Data odbioru</label>
-                            <input class="dateIn" type="date" id="dateIn" name="dates"
-                              placeholder="Date et heure de départ et de retour">
-                            <label for="passengers">Ilość pasażerów</label>
-                            <input class="dateOut" type="date" id="dateOut" name="passengers"
-                              placeholder="Nombre de passagers">
-                          </div>
-                          <div class="form-group">
-                            <button type="submit" class="btn btn-secondary">Wyszukaj!</button>
-                          </div>
+                            <select id="location" name="location">
+                              <option value="">Wybierz miejsce</option>
+                              <option value="Poznań">Poznań</option>
+                              <option value="Gdańsk">Gdańsk</option>
+                              <option value="Warszawa">Warszawa</option>
+                              <option value="Kraków">Kraków</option>
+                            </select>
+                            </div>
+                            <div class="form-group-dates">
+                                <label for="dates">Data odbioru</label>
+                                <input class="dateIn" type="date" id="dateIn" name="dateIn">
+                                <label for="passengers">Data zwrotu</label>
+                                <input class="dateOut" type="date" id="dateOut" name="dateOut">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-secondary">Wyszukaj!</button>
+                            </div>
                         </form>
-                      </div>
                     </div>
+                </div>
                   </header>`;
                     this.clear();
                     this.parentContainer.insertAdjacentHTML("afterbegin", html);
@@ -140,25 +144,25 @@ class LoginView extends View {
             // data.forEach((a) => { console.log(a) });
             if (!a.target.getAttribute("href")) return;
             if (a.target.getAttribute("href") === "#section-one") {
-                const html = `${this.#headerHTML}
+                const html = `${this.headerHTML}
                             `
                 this.clear()
                 this.parentContainer.insertAdjacentHTML("afterbegin", html)
             }
             if (a.target.getAttribute("href") === "#section-two") {
-                const html = `${this.#headerHTML}
+                const html = `${this.headerHTML}
                             `
                 this.clear()
                 this.parentContainer.insertAdjacentHTML("afterbegin", html)
             }
             if (a.target.getAttribute("href") === "#section-three") {
-                const html = `${this.#headerHTML}
+                const html = `${this.headerHTML}
                             `
                 this.clear()
                 this.parentContainer.insertAdjacentHTML("afterbegin", html)
             }
             if (a.target.getAttribute("href") === "#section-four") {
-                const html = `${this.#headerHTML}
+                const html = `${this.headerHTML}
                             <section class="profile-section section" id="section-four">
                             <div class="profile-container">
                             <aside class="aside-bar">
