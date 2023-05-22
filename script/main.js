@@ -9,6 +9,7 @@ import * as twoView from "./views/sectionTwoView.js"
 import * as createView from "./views/createView.js";
 import * as loginView from "./views/loginView.js";
 import * as searchView from "./views/searchView.js";
+import * as reservationView from "./views/reservationView.js";
 
 
 
@@ -45,10 +46,16 @@ const searchControll = function () {
     searchView.app.evnet()
 }
 
+const reservationControll = function () {
+    reservationView.app.event();
+}
+
 mainViewControll();
 oneViewControll();
 twoViewControll();
 createControll();
 loginControll();
 searchControll();
+reservationControll()
+
 

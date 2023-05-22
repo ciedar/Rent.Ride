@@ -164,7 +164,6 @@ export const updateUserInfo = async (userId, userData) => {
 
 export const deleteAccount = () => {
     const user = auth.currentUser;
-    console.log(user);
     deleteUser(user)
         .then(() => {
             console.log("Konto użytkownika zostało usunięte.");
@@ -175,7 +174,6 @@ export const deleteAccount = () => {
 }
 
 export const deleteUserDataFromDataBase = (userId) => {
-    // const userRef = doc(db, "users", userId);    
     deleteDoc(doc(db, "users", userId))
         .then(() => {
             console.log(`Dane o użytkowniku nr ${userId} zostały pomyslnie usunięte`)
@@ -185,17 +183,8 @@ export const deleteUserDataFromDataBase = (userId) => {
 }
 
 
-
-
-
-const colRef = collection(db, "cars");
-const okok = await getDocs(colRef);
-const map = okok.docs.map(a => { return a.data() });
-console.log(map)
-const fil = map.filter((a) => {
-    if (a.location === "gdańsk") {
-        return a;
-    }
-})
-console.log(fil)
-
+export const getData = async (id) => {
+    const ref = doc(db, "cars", id);
+    const data = await getDoc(ref);
+    return data;
+}

@@ -1,0 +1,39 @@
+.reservation-div {
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    margin-top: 5em;
+    margin-bottom: 5em;
+    width: 70%;
+    background-color: white;
+    gap: 5em;
+    padding: 5em;
+}
+
+.reservation-div-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.reservation-div-info h5 {
+    font-size: 28px;
+    text-transform: uppercase;
+}
+
+.reservation-div-info li {
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+.reservation-div-info ul {
+    padding-top: 2em;
+}
+
+.reservation-div-info button {
+    width: 50%;
+    height: 60px;
+    /* background-color: aquamarine; */
+    font-size: 28px;
+}

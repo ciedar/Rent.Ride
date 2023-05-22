@@ -195,7 +195,7 @@ class LoginView extends View {
             try {
                 if (!a.target.classList.contains("aside-a")) return;
                 if (a.target.textContent === "Profil") {
-                    const data = this.#userData.data;
+                    const data = this.#userData[0].data;
                     console.log(data);
                     const html = `<div class="profile-container-div profile-div">
                     <div class="username-div profile-info-div">

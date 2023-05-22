@@ -162,15 +162,11 @@
     margin: auto;
     display: flex;
     flex-direction: column;
-    /* flex-wrap: wrap; */
-    /* justify-content: space-between; */
     row-gap: 5em;
 }
 
-.fire {
-    /* border: 1px solid black; */
-    /* border-radius: 10px; */
-    /* width: calc(50% - 10px); */
+.car-info {
+
     display: flex;
     gap: 1em;
 }

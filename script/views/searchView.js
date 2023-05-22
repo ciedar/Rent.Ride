@@ -5,18 +5,7 @@ class searchView extends View {
   #value;
   #container
   #fleet;
-  #elementContainer = document.body.closest("header");
 
-  // renderSearchView() {
-  //   this.parentContainer.addEventListener("click", (a) => {
-  //     if (a.target.closest(".btn-secondary")) {
-  //       this.clear();
-  //       this.parentContainer.insertAdjacentHTML("afterbegin", this.headerHTML);
-  //       this.createContainer();
-  //       this.searchAsideBar();
-  //     }
-  //   })
-  // }
   createContainer() {
     this.#container = document.createElement("section");
     this.parentContainer.appendChild(this.#container);
@@ -74,12 +63,12 @@ class searchView extends View {
       if (this.#value.value.toLowerCase() != "wszystkie") {
         filter.forEach(async (a) => {
           const html = ` 
-                   <div class="fire"> 
+                   <div class="car-info car-info-${a.id}" id="${a.id}"> 
                    <img src="${await firebase.refURL(a.imgUrl)}" width="200px">
                    <div class="fire_fire">
                    <h2 class="name">${a.model}</h2>
                    <p>asdmaskd aksdjasik asdybasdjh jasnda</p>
-                   <button>sprawdzam</button>
+                   <button class="reserv-btn">sprawdzam</button>
                    </div>
                    </div>`
           document.querySelector(".metin2").insertAdjacentHTML("afterbegin", html);
@@ -87,14 +76,14 @@ class searchView extends View {
       } else {
         data.forEach(async (a) => {
           const html = ` 
-          <div class="fire"> 
-          <img src="${await firebase.refURL(a.imgUrl)}" width="200px">
-          <div class="fire_fire">
-          <h2 class="name">${a.model}</h2>
-          <p>asdmaskd aksdjasik asdybasdjh jasnda</p>
-          <button>sprawdzam</button>
-          </div>
-          </div>`
+          <div class="car-info car-info-${a.id}" id="${a.id}"> 
+                   <img src="${await firebase.refURL(a.imgUrl)}" width="200px">
+                   <div class="fire_fire">
+                   <h2 class="name">${a.model}</h2>
+                   <p>asdmaskd aksdjasik asdybasdjh jasnda</p>
+                   <button class="reserv-btn">sprawdzam</button>
+                   </div>
+                   </div>`
           document.querySelector(".metin2").insertAdjacentHTML("afterbegin", html);
         })
       }
