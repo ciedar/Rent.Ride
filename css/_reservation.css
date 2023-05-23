@@ -37,3 +37,29 @@
     /* background-color: aquamarine; */
     font-size: 28px;
 }
+
+.reservation-details-container {
+    display: flex;
+    width: 70%;
+    margin: auto;
+    justify-content: space-evenly;
+    margin-bottom: 5em;
+}
+
+.reservation-details-info-div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-left: -15em;
+}
+
+.reservation-details-info-div input {
+    width: 150%;
+    height: 30px;
+    font-size: 20px;
+}
+
+.reservation-details-info-div button {
+    height: 50px;
+    font-weight: bold;
+}

@@ -47,7 +47,9 @@ const searchControll = function () {
 }
 
 const reservationControll = function () {
-    reservationView.app.event();
+    reservationView.app.showDetailsEvent();
+    reservationView.app.renderReservationView();
+    reservationView.app.confirmReservation();
 }
 
 mainViewControll();

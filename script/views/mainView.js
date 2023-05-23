@@ -210,12 +210,6 @@ export default class View {
                   <option value="Kraków">Kraków</option>
                 </select>
                 </div>
-                <div class="form-group-dates">
-                    <label for="dates">Data odbioru</label>
-                    <input class="dateIn" type="date" id="dateIn" name="dateIn">
-                    <label for="passengers">Data zwrotu</label>
-                    <input class="dateOut" type="date" id="dateOut" name="dateOut">
-                </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-secondary">Wyszukaj!</button>
                 </div>
@@ -264,12 +258,6 @@ export default class View {
                       <option value="Warszawa">Warszawa</option>
                       <option value="Kraków">Kraków</option>
                     </select>
-                    </div>
-                    <div class="form-group-dates">
-                        <label for="dates">Data odbioru</label>
-                        <input class="dateIn" type="date" id="dateIn" name="dateIn">
-                        <label for="passengers">Data zwrotu</label>
-                        <input class="dateOut" type="date" id="dateOut" name="dateOut">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-secondary">Wyszukaj!</button>

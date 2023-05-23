@@ -5,6 +5,44 @@ class searchView extends View {
   #value;
   #container
   #fleet;
+  #headerHTML = `<header id="header">
+  <nav>
+      <div class="logo">
+          <a href="#home">Rent&Ride</a>
+      </div>
+      <div class="nav-links">
+          <ul>
+              <li><a href="#header">Wypożycz</a></li>
+              <li><a href="#section-one">Dlaczego my</a></li>
+              <li><a href="#section-two">Flota</a></li>
+              <li><a href="#section-three">Miasta</a></li>
+              <li><a href="#section-four">Profil</a></li>
+              <li><a href="#" class="btn log-out-btn">Wyloguj</a></li>
+          </ul>
+      </div>
+  </nav>
+  <div class="header-content">
+      <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+      <p>Lorem ipsum dolor sit amet.</p>
+      <div class="search-form">
+          <form>
+          <div class="form-group">
+          <label for="location">Skąd?</label>
+          <select class="location" id="location" name="location">
+            <option value="Wszystkie">Wszystkie lokalizacje</option>
+            <option value="Poznań">Poznań</option>
+            <option value="Gdańsk">Gdańsk</option>
+            <option value="Warszawa">Warszawa</option>
+            <option value="Kraków">Kraków</option>
+          </select>
+          </div>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-secondary">Wyszukaj!</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</header>`
 
   createContainer() {
     this.#container = document.createElement("section");
@@ -41,7 +79,6 @@ class searchView extends View {
               <option value="suv">Kraków</option>
               <option value="convertible">Gdańsk</option>
             </select>
-
             <button class="sidebar__button" type="submit">Filtruj</button>
           </form>
         </div>
@@ -98,7 +135,7 @@ class searchView extends View {
       this.#value = document.querySelector("#location");
       // console.log(this.#value);
       this.clear();
-      this.parentContainer.insertAdjacentHTML("afterbegin", this.headerHTML);
+      this.parentContainer.insertAdjacentHTML("afterbegin", this.#headerHTML);
       this.loadCars("cars")
 
     })

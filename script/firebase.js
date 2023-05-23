@@ -1,7 +1,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import { deleteUser, signOut, onAuthStateChanged, getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, updatePassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-import { deleteDoc, getFirestore, getDocs, getDoc, collection, addDoc, doc, where, query, updateDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+import { deleteField, deleteDoc, getFirestore, getDocs, getDoc, collection, addDoc, doc, where, query, updateDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
 
@@ -30,6 +30,7 @@ export let currentUser = auth.currentUser;
 export const user = onAuthStateChanged;
 export let userId;
 export let currentUserData;
+export const deleteDataField = deleteField();
 
 
 // export const logged = () => {
@@ -66,6 +67,7 @@ export const checkCurrentUser = () => {
         }, reject);
     });
 };
+
 
 export const loginAccount = async (email, password) => {
     try {
@@ -160,6 +162,16 @@ export const updateUserInfo = async (userId, userData) => {
         console.log('cos poszło nie tak', error.message);
     }
 }
+export const updateCarInfo = async (carId, data) => {
+    try {
+        const carRef = doc(db, "cars", carId)
+        await updateDoc(carRef, data)
+        console.log("zaktualizowano");
+
+    } catch (error) {
+        console.log('cos poszło nie tak', error.message);
+    }
+}
 
 
 export const deleteAccount = () => {
@@ -188,3 +200,8 @@ export const getData = async (id) => {
     const data = await getDoc(ref);
     return data;
 }
+
+
+// const a = await getData("pzhblERGDpz02X7vUUuy");
+// console.log(a.data())
+
