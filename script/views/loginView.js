@@ -220,7 +220,12 @@ class LoginView extends View {
 
                     firebase.updateCarInfo(this.#carData?.data()?.id, carData);
                     firebase.updateUserInfo(this.#userData[0]?.id, userData);
-                    this.logOut();
+                    this.clear();
+                    this.renderMainView();
+                    firebase.logOut(firebase.auth).then(() => {
+                        alert(`W celu poprawnego anulowania rezerwacji musieliśmy Cie wylogować, po ponownym zalogowaniu Twoja rezerwacja powinna być już niedostępna`);
+                    })
+
                 })
             }
             if (a.target.textContent === "Zmiana hasła") {

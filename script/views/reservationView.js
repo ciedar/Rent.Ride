@@ -50,51 +50,99 @@ class ReservationView extends View {
             if (!a.target.closest(".reserv-btn")) return;
             this.#carId = a.target.closest(".car-info").getAttribute("id");
             this.#carInfo = await firebase.getData(this.#carId);
+            firebase.checkCurrentUser().then(async (user) => {
+                if (user != null) {
+                    const html = `${this.#headerHTML}
+                    <div class="reservation-div">
+                        <div class="reservation-div-img">
+                            <img src="${await firebase.refURL(this.#carInfo.data().imgUrl)}" width="400px">
+                        </div>
+                        <div class="reservation-div-info">
+                            <h5>${this.#carInfo.data().model}</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, dicta nam numquam commodi
+                                fuga, culpa minima ipsam enim distinctio iure non illo. Eius, debitis sint!</p>
+                            <ul>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                            </ul>
+                            <button class="reservation-btn">
+                                ${this.#carInfo.data().price}zł/day
+                            </button>
+                        </div>
+                    </div>`
+                    this.clear();
+                    this.parentContainer.insertAdjacentHTML("afterbegin", html);
+                } else {
+                    const html = `${this.headerHTML}
+                    <div class="reservation-div">
+                        <div class="reservation-div-img">
+                            <img src="${await firebase.refURL(this.#carInfo.data().imgUrl)}" width="400px">
+                        </div>
+                        <div class="reservation-div-info">
+                            <h5>${this.#carInfo.data().model}</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, dicta nam numquam commodi
+                                fuga, culpa minima ipsam enim distinctio iure non illo. Eius, debitis sint!</p>
+                            <ul>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                                <li>Lorem, ipsum.</li>
+                            </ul>
+                            <button class="reservation-btn">
+                                ${this.#carInfo.data().price}zł/day
+                            </button>
+                        </div>
+                    </div>`
+                    this.clear();
+                    this.parentContainer.insertAdjacentHTML("afterbegin", html);
 
-            const html = `${this.#headerHTML}
-            <div class="reservation-div">
-                <div class="reservation-div-img">
-                    <img src="${await firebase.refURL(this.#carInfo.data().imgUrl)}" width="400px">
-                </div>
-                <div class="reservation-div-info">
-                    <h5>${this.#carInfo.data().model}</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, dicta nam numquam commodi
-                        fuga, culpa minima ipsam enim distinctio iure non illo. Eius, debitis sint!</p>
-                    <ul>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                    </ul>
-                    <button class="reservation-btn">
-                        ${this.#carInfo.data().price}zł/day
-                    </button>
-                </div>
-            </div>`
-            this.clear();
-            this.parentContainer.insertAdjacentHTML("afterbegin", html);
+                }
+            })
         })
     }
 
     renderReservationView() {
         document.body.addEventListener("click", async (a) => {
             if (!a.target.closest(".reservation-btn")) return;
-            const html = `${this.#headerHTML}
-            <div class="reservation-details-container">
-            <div class="reservation-details-img-div">
-            <img src="${await firebase.refURL(this.#carInfo.data().imgUrl)}" width="400px">
-            </div>
-            <div class="reservation-details-info-div">
-            <h5>od</h5>
-            <input class="date-in" type="date">
-            <h5>Ilość dni:</h5>
-            <input type="number" class="days-amount">
-            <button class="rezerwuje"> rezerwuje </button>
-            </div>
-            </div>`
-            this.clear();
-            this.parentContainer.insertAdjacentHTML('afterbegin', html);
+            firebase.checkCurrentUser().then(async (user) => {
+                if (user != null) {
+                    const html = `${this.#headerHTML}
+                    <div class="reservation-details-container">
+                    <div class="reservation-details-img-div">
+                    <img src="${await firebase.refURL(this.#carInfo.data().imgUrl)}" width="400px">
+                    </div>
+                    <div class="reservation-details-info-div">
+                    <h5>od</h5>
+                    <input class="date-in" type="date">
+                    <h5>Ilość dni:</h5>
+                    <input type="number" class="days-amount">
+                    <button class="rezerwuje"> rezerwuje </button>
+                    </div>
+                    </div>`
+                    this.clear();
+                    this.parentContainer.insertAdjacentHTML('afterbegin', html);
+                } else {
+                    const html = `${this.headerHTML}
+                    <div class="reservation-details-container">
+                    <div class="reservation-details-img-div">
+                    <img src="${await firebase.refURL(this.#carInfo.data().imgUrl)}" width="400px">
+                    </div>
+                    <div class="reservation-details-info-div">
+                    <h5>od</h5>
+                    <input class="date-in" type="date">
+                    <h5>Ilość dni:</h5>
+                    <input type="number" class="days-amount">
+                    <button class="rezerwuje"> rezerwuje </button>
+                    </div>
+                    </div>`
+                    this.clear();
+                    this.parentContainer.insertAdjacentHTML('afterbegin', html);
+                }
+            })
 
         })
     }
@@ -118,7 +166,11 @@ class ReservationView extends View {
                     }
                     await firebase.updateUserInfo(userData[0].id, data);
                     await firebase.updateCarInfo(this.#carId, carData);
-                    this.logOut();
+                    this.clear();
+                    this.renderMainView();
+                    firebase.logOut(firebase.auth).then(() => {
+                        alert(`W celu przetworzenia rezerwacji musieliśmy Cie wylogować, po ponownym zalogownaiu Twoja rezerwacja powinna byc dostępna w zakładce rezerwacje`);
+                    })
 
 
                 } else {

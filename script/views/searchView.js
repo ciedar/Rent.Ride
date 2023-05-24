@@ -135,8 +135,16 @@ class searchView extends View {
       this.#value = document.querySelector("#location");
       // console.log(this.#value);
       this.clear();
-      this.parentContainer.insertAdjacentHTML("afterbegin", this.#headerHTML);
-      this.loadCars("cars")
+      firebase.checkCurrentUser().then((user) => {
+        console.log(user);
+        if (user != null) {
+          this.parentContainer.insertAdjacentHTML("afterbegin", this.#headerHTML);
+          this.loadCars("cars")
+        } else {
+          this.parentContainer.insertAdjacentHTML("afterbegin", this.headerHTML);
+          this.loadCars("cars")
+        }
+      })
 
     })
   }
