@@ -159,7 +159,9 @@ class ReservationView extends View {
                     this.#user = firebase.userId;
                     const userData = await firebase.getCurrentUserData("id", this.#user);
                     const data = {
-                        reservationNr: this.#carInfo.data().id
+                        reservationNr: this.#carInfo.data().id,
+                        dateInReservation: dateIn.value,
+                        reservationDays: days.value
                     }
                     const carData = {
                         reserved: true

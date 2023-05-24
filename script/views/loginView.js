@@ -45,7 +45,6 @@ class LoginView extends View {
         </div>
     </div>
 </header>`
-    #bodyHTML = ``
     createLoginView() {
         this.parentContainer.addEventListener("click", (a) => {
             if (!a.target.closest(".login-btn")) return;
@@ -76,21 +75,16 @@ class LoginView extends View {
                 this.#user = firebase.userId;
                 this.#userData = await firebase.getCurrentUserData("id", this.#user)
                 this.#userId = this.#userData[0].id
-                console.log(this.#user)
-                console.log(this.#userData)
-                console.log(this.#userId)
                 firebase.checkCurrentUser().then((user) => {
                     if (user != null) {
                         const html = `${this.#headerHTML}`;
                         this.clear();
                         this.parentContainer.insertAdjacentHTML("afterbegin", html);
                         this.renderNavElementSection();
-                        console.log("zalogowano", user)
                     }
                     else {
                         this.clear();
                         this.createLoginView();
-                        console.log("nope", user)
                     }
                 })
             } catch (error) {
@@ -107,7 +101,6 @@ class LoginView extends View {
             if (!a.target.getAttribute("href")) return;
             if (a.target.getAttribute("href") === "#home") {
                 const html = `${this.#headerHTML}${this.bodyHTML}`
-                console.log(html)
                 this.clear()
                 this.parentContainer.insertAdjacentHTML("afterbegin", html)
             }
@@ -186,8 +179,9 @@ class LoginView extends View {
                     const html = `<div class="profile-container-div profile-div">
                     <div class="reservation-div profile-info-div">
                     <h2>Twoje rezerwacje </h2>
-                    <p>Rezerwacja nr:${data?.reservationNr} </p> 
-                    <h5> price:${this.#carData?.data()?.price} </h5>
+                    <p>Rezerwacja nr:${data?.reservationNr} </p>
+                    <p>Odbiór auta: dnia ${data?.dateInReservation} w ${this.#carData?.data().location}  
+                    <p>total price:${this.#carData?.data()?.price * data?.reservationDays} </p>
                     <button class="cancel"> anuluj rezerwacje </button>
                     </div>
                     </div>
@@ -209,10 +203,10 @@ class LoginView extends View {
                 }
 
                 document.querySelector(".cancel").addEventListener("click", () => {
-                    console.log(this.#userData[0]);
-                    console.log(this.#carData);
                     const userData = {
-                        reservationNr: null
+                        reservationNr: null,
+                        dateInReservation: null,
+                        reservationDays: null
                     }
                     const carData = {
                         reserved: false

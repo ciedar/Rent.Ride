@@ -130,13 +130,10 @@ class searchView extends View {
   }
   evnet() {
     this.parentContainer.addEventListener("click", (a) => {
-      // a.preventDefault()
       if (!a.target.closest(".btn-secondary")) return;
       this.#value = document.querySelector("#location");
-      // console.log(this.#value);
       this.clear();
       firebase.checkCurrentUser().then((user) => {
-        console.log(user);
         if (user != null) {
           this.parentContainer.insertAdjacentHTML("afterbegin", this.#headerHTML);
           this.loadCars("cars")

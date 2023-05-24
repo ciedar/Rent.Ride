@@ -1,4 +1,3 @@
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import { deleteUser, signOut, onAuthStateChanged, getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, updatePassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 import { deleteField, deleteDoc, getFirestore, getDocs, getDoc, collection, addDoc, doc, where, query, updateDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
@@ -32,21 +31,9 @@ export let userId;
 export let currentUserData;
 export const deleteDataField = deleteField();
 
-
-// export const logged = () => {
-//     onAuthStateChanged(auth, (user) => {
-//         if (user) {
-//             console.log("zalogowany")
-//         } else {
-//             console.log("nie")
-//         }
-//     })
-// }
-// logged()
-
+// displaying currentUser data from database
 export const getCurrentUser = async (userId) => {
     const ref = doc(db, "users", userId);
-    console.log(ref);
     try {
         const docSnap = await getDoc(ref);
         if (docSnap.exists()) {
@@ -59,6 +46,8 @@ export const getCurrentUser = async (userId) => {
     }
 };
 
+
+// Checking if user is currently logged or no
 export const checkCurrentUser = () => {
     return new Promise((resolve, reject) => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -68,7 +57,7 @@ export const checkCurrentUser = () => {
     });
 };
 
-
+// loggin function
 export const loginAccount = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -80,24 +69,30 @@ export const loginAccount = async (email, password) => {
     }
 };
 
+
+// register/login with google
 export const googleAuth = new GoogleAuthProvider();
 export const signPop = () => signInWithPopup(auth, googleAuth);
 
+
+// showing data collection depends on type like - cars/users
 export const showData = async (type) => {
     try {
         const data = await getDocs(collection(db, type));
-        // console.log(data);
         return data;
     } catch (error) {
         console.error("Error:", error);
     }
 };
 
+
+// dwonloading img from storage 
 export const refURL = async (url) => {
     const link = ref(storage, url);
     return getDownloadURL(link);
 };
 
+// creating new user in databse when new user create account
 export const createUserData = async (data, info, password) => {
     const userData = collection(db, "users");
     try {
@@ -112,16 +107,8 @@ export const createUserData = async (data, info, password) => {
     }
 };
 
-// export const getCurrentUserData = async (type, userId) => {
-//     const col = collection(db, "users");
-//     const data = query(col, where(type, "==", userId));
-//     try {
-//         const result = await getDocs(data);
-//         return result.docs.map((a) => a.data());
-//     } catch (error) {
-//         console.error(error);
-//     }
-// };
+
+// Displaying curren user information from database
 export const getCurrentUserData = async (type, userId) => {
     const col = collection(db, "users");
     const data = query(col, where(type, "==", userId));
@@ -138,8 +125,7 @@ export const getCurrentUserData = async (type, userId) => {
     }
 };
 
-
-
+// allow user to change his password
 export const changePassword = async (newPassword) => {
     try {
         const user = auth.currentUser;
@@ -151,6 +137,7 @@ export const changePassword = async (newPassword) => {
 };
 
 
+// updating user infomration in database
 
 export const updateUserInfo = async (userId, userData) => {
     try {
@@ -162,6 +149,8 @@ export const updateUserInfo = async (userId, userData) => {
         console.log('cos poszło nie tak', error.message);
     }
 }
+
+// update car information in database
 export const updateCarInfo = async (carId, data) => {
     try {
         const carRef = doc(db, "cars", carId)
@@ -174,6 +163,7 @@ export const updateCarInfo = async (carId, data) => {
 }
 
 
+// allow user to delete his own account
 export const deleteAccount = () => {
     const user = auth.currentUser;
     deleteUser(user)
@@ -184,7 +174,7 @@ export const deleteAccount = () => {
             console.error("Błąd podczas usuwania konta użytkownika:", error);
         });
 }
-
+/// when user delete his account delete all information in database about him
 export const deleteUserDataFromDataBase = (userId) => {
     deleteDoc(doc(db, "users", userId))
         .then(() => {
@@ -195,13 +185,9 @@ export const deleteUserDataFromDataBase = (userId) => {
 }
 
 
+// get car data from database 
 export const getData = async (id) => {
     const ref = doc(db, "cars", id);
     const data = await getDoc(ref);
     return data;
 }
-
-
-// const a = await getData("pzhblERGDpz02X7vUUuy");
-// console.log(a.data())
-
